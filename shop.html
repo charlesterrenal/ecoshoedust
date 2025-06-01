@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - ECO SHOE-DUST</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="site-name">ECO SHOE-DUST</a>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="main-menu" class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="team.html">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-content">
+
+        <section class="shop-hero">
+            <div class="image-container">
+                <img src="Sole.png" alt="Footwear Collection">
+            </div>
+            <div class="text-content">
+                <h2 class="section-heading" style="text-align: left;">EXPLORE OUR FOOTWEAR COLLECTION</h2>
+                <p class="section-subheading" style="text-align: left; margin-left: 0; margin-right: 0;">Discover shoes crafted with sustainable comfort soles, designed for comfort and environmental impact. Our eco-conscious footwear features innovation with Marikina's shoemaking heritage for a greener future.</p>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <h2 class="section-heading">PRODUCTS</h2>
+            <div class="product-categories">
+                <div class="product-category-box">
+                    <div class="image-placeholder">
+                        <img src="Sole.png" alt="Eco Footwear">
+                    </div>
+                    SOLE
+                </div>
+                <div class="product-category-box">
+                    <div class="image-placeholder">
+                        <img src="Sole2.png" alt="Eco Footwear">
+                    </div>
+                    INSOLE
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p class="footer-text">ECO SHOE-DUST</p>
+        <ul class="social-icons">
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainMenu = document.getElementById('main-menu');
+
+            menuToggle.addEventListener('click', function() {
+                mainMenu.classList.toggle('nav-open');
+                let expanded = this.getAttribute('aria-expanded') === 'true' || false;
+                this.setAttribute('aria-expanded', !expanded);
+            });
+
+            mainMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainMenu.classList.remove('nav-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
