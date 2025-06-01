@@ -1,0 +1,816 @@
+/* style.css */
+
+/* --- Universal Box Sizing --- */
+/* Makes padding and border included in the element's total width/height */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* --- Basic Body & Global Styles --- */
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif; /* A modern, readable font */
+    line-height: 1.7;
+    background-color: #f8f9fa; /* Very light grey */
+    color: #343a40; /* Dark grey text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scroll from padding/margins */
+}
+
+/* Base link styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Base button styles - now more generic for styling later */
+.btn {
+    background-color: transparent; /* Default to transparent */
+    color: #343a40; /* Default text color */
+    border: 2px solid #343a40; /* Default border color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-block; /* Allows padding and margin to work */
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+/* --- Header Styles --- */
+.site-header {
+    background-color: #bc6e26; /* Orange/brown background */
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative; /* Essential for positioning the absolute mobile menu */
+    z-index: 100; /* Ensures header content is above other page content */
+}
+
+.site-name {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Hamburger menu toggle button */
+.menu-toggle {
+    display: none; /* Hidden by default on larger screens */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em; /* Size of the hamburger icon */
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101; /* Ensure it's above the main nav when collapsed */
+}
+
+/* Main Navigation (default for larger screens) */
+.main-nav {
+    display: flex; /* Flex container for the nav links */
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Ensures links are in a row */
+}
+
+.main-nav li {
+    margin-left: 30px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 0;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.main-nav a:hover {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.main-nav a.active {
+    color: white;
+}
+
+.main-nav a.active::after { /* Underline indicator for active page */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    animation: slideIn 0.3s forwards;
+}
+
+@keyframes slideIn {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* --- Main Content Area - This will be overridden by custom sections --- */
+.page-content {
+    flex-grow: 1;
+    width: 100%; /* Default to full width for custom sections */
+    max-width: none; /* No max width */
+    margin: 0;
+    padding: 0;
+    background-color: white; /* Default background, overridden by sections */
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* Generic content headings - these will be used inside various sections */
+.section-heading {
+    color: #343a40;
+    font-weight: 700;
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+.section-subheading {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Footer Styles --- */
+.site-footer {
+    background-color: #bc6e26; /* Orange/brown background */
+    color: white;
+    padding: 25px 50px;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    text-transform: uppercase;
+}
+
+.footer-text {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.social-icons {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 15px; /* Space between icons */
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+.social-icons a:hover {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+/* ==================================================================== */
+/* --- HOME PAGE SPECIFIC STYLES --- */
+/* ==================================================================== */
+
+/* Section 1 & 3 Base Style (image and text layout) */
+.content-section {
+    display: flex;
+    align-items: center;
+    padding: 80px 50px; /* Generous padding top/bottom and sides */
+    gap: 50px; /* Space between image and text */
+    justify-content: center; /* Center content when not enough to fill width */
+    /* NEW: Add border to separate from next section if backgrounds differ */
+    border-bottom: 1px solid #cccccc; /* Subtle light gray line */
+}
+
+.content-section.dark-bg {
+    background-color: #5D6D50; /* Olive green background */
+    color: white;
+}
+
+.content-section .text-content {
+    flex: 1; /* Allows text content to take up available space */
+    max-width: 600px; /* Limit text width for readability */
+}
+
+.content-section .text-content h2 {
+    font-size: 3.5em; /* Large heading */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: inherit; /* Inherit color from parent section (white on dark bg) */
+}
+
+.content-section .text-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.content-section .image-container {
+    flex: 1; /* Allows image container to take up available space */
+    max-width: 600px; /* Limit image width */
+    min-height: 400px; /* Minimum height for visual balance */
+    background-color: #e0e0e0; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #aaa;
+    /* For actual image, use an <img> tag inside */
+}
+
+/* Ensure images within these main containers are responsive */
+.content-section .image-container img {
+    max-width: 100%;
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    object-fit: cover; /* Crops to fit while maintaining aspect ratio */
+    border-radius: 5px; /* Slight round corners */
+}
+
+/* Specific button styles for section 1 */
+.section1-buttons .btn {
+    margin-right: 15px;
+    border-color: #343a40; /* Dark border for buttons */
+    color: #343434; /* Dark text */
+    background-color: transparent;
+}
+
+.section1-buttons .btn:hover {
+    background-color: #343434;
+    color: white;
+}
+
+/* Flipped layout for Section 3 */
+.content-section.flipped {
+    flex-direction: row-reverse; /* Flips the order of items */
+    background-color: #5D6D50; /* Same olive green as section 2 */
+    color: white;
+    /* No border-bottom needed here as it's the last section before footer */
+}
+
+/* Specific button styles for section 3 */
+.section3-buttons .btn {
+    border-color: white; /* White border for buttons on dark background */
+    color: white;
+    background-color: transparent;
+}
+
+.section3-buttons .btn:hover {
+    background-color: white;
+    color: #5D6D50; /* Dark text on white hover */
+}
+
+
+/* Section 2 (Central text and 3 divs) */
+.mid-section {
+    background-color: #3B4B31; /* Darker olive green background */
+    color: white;
+    padding: 80px 50px;
+    text-align: center;
+    /* NEW: Add border to separate from next section if backgrounds differ */
+    /* This section is followed by another dark section, so no border needed here based on "between colors" */
+}
+
+.mid-section h2 {
+    font-size: 2.8em; /* Prominent heading */
+    margin-bottom: 50px;
+    color: white; /* White heading */
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid for features */
+    gap: 30px;
+    max-width: 1000px; /* Limit grid width */
+    margin: 0 auto; /* Center the grid */
+}
+
+.feature-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
+    padding: 30px;
+    border-radius: 8px;
+    text-align: left; /* Align text to left inside boxes */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    transition: background-color 0.3s ease;
+}
+
+.feature-box:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.feature-box h3 {
+    font-size: 1.4em;
+    margin-top: 0;
+    color: white; /* White heading in feature boxes */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-box p {
+    font-size: 1em;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+/* ==================================================================== */
+/* --- GALLERY PAGE SPECIFIC STYLES --- */
+/* ==================================================================== */
+.gallery-hero {
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    background-color: #f8f9fa; /* Match body background */
+    /* NEW: Add border to separate from next section */
+    border-bottom: 1px solid #cccccc; /* Subtle light gray line */
+}
+
+.gallery-hero .text-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.gallery-hero .image-container {
+    flex: 1;
+    max-width: 600px;
+    min-height: 400px;
+    background-color: #e0e0e0; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #aaa;
+}
+
+/* Ensure images within gallery hero container are responsive */
+.gallery-hero .image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.gallery-grid-section {
+    background-color: #5D6D50; /* Dark green background as per sample */
+    padding: 80px 50px;
+}
+
+.gallery-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto; /* Center the grid */
+}
+
+.gallery-grid-container .image-placeholder {
+    width: 100%;
+    height: 250px; /* Height for gallery image placeholders */
+    background-color: #3B4B31; /* Darker green for internal boxes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    /* Crucial for images inside: */
+    overflow: hidden; /* Hide anything that goes outside */
+}
+
+/* NEW: Styles for images placed INSIDE the .image-placeholder divs in gallery grid */
+.gallery-grid-container .image-placeholder img {
+    width: 100%; /* Image fills the placeholder's width */
+    height: 100%; /* Image fills the placeholder's height */
+    object-fit: cover; /* Important: Crops to fit while maintaining aspect ratio */
+    display: block;
+    border-radius: inherit; /* Inherit border-radius from parent placeholder */
+}
+
+
+/* ==================================================================== */
+/* --- SHOP PAGE SPECIFIC STYLES --- */
+/* ==================================================================== */
+.shop-hero {
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    background-color: #f8f9fa; /* Match body background */
+    /* NEW: Add border to separate from next section */
+    border-bottom: 1px solid #cccccc; /* Subtle light gray line */
+}
+
+.shop-hero .text-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.shop-hero .image-container {
+    flex: 1;
+    max-width: 600px;
+    min-height: 400px;
+    background-color: #e0e0e0; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #aaa;
+}
+
+/* Ensure images within shop hero container are responsive */
+.shop-hero .image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.pricing-section {
+    background-color: #5D6D50; /* Dark green background as per sample */
+    color: white;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.pricing-section .section-heading {
+    color: white; /* White heading on dark background */
+}
+
+.product-categories {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Space between sole and insole boxes */
+    max-width: 800px;
+    margin: 50px auto 0; /* Space below heading, center */
+}
+
+.product-category-box {
+    flex: 1;
+    background-color: #3B4B31; /* Darker green for internal boxes */
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    min-height: 300px; /* Placeholder height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.product-category-box .image-placeholder {
+    width: 200px; /* Fixed width for inner image placeholder */
+    height: 150px; /* Fixed height for inner image placeholder */
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter placeholder */
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    /* Crucial for images inside: */
+    overflow: hidden; /* Hide anything that goes outside */
+}
+
+/* NEW: Styles for images placed INSIDE the .image-placeholder divs in shop product categories */
+.product-category-box .image-placeholder img {
+    width: 100%; /* Image fills the placeholder's width */
+    height: 100%; /* Image fills the placeholder's height */
+    object-fit: cover; /* Important: Crops to fit while maintaining aspect ratio */
+    display: block;
+    border-radius: inherit; /* Inherit border-radius from parent placeholder */
+}
+
+
+/* ==================================================================== */
+/* --- TEAM PAGE SPECIFIC STYLES --- */
+/* ==================================================================== */
+.team-section {
+    background-color: #5D6D50; /* Dark green background as per sample */
+    color: white;
+    padding: 80px 50px;
+    text-align: center;
+    /* No border needed here as it's the only main section */
+}
+
+.team-section .section-heading {
+    color: white; /* White heading on dark background */
+    margin-bottom: 50px;
+}
+
+.team-grid {
+    display: grid;
+    /* This creates a responsive grid: 2 columns on medium screens, 3 on larger, 1 on small */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2-3 columns on larger screens */
+    gap: 40px; /* More space between members */
+    max-width: 900px; /* Limit overall grid width */
+    margin: 0 auto; /* Center the grid container itself */
+    justify-content: center; /* Centers grid items along the row axis */
+}
+
+.team-member {
+    background-color: transparent; /* No background for member boxes */
+    border: none; /* No border */
+    padding: 0;
+    box-shadow: none;
+    text-align: center;
+}
+
+.team-member .image-placeholder {
+    width: 150px; /* Placeholder image size */
+    height: 150px;
+    background-color: #3B4B31; /* Darker green for placeholder */
+    border-radius: 5px; /* Square images as per sample */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 auto 20px; /* Center and add margin below */
+    /* Crucial for images inside: */
+    overflow: hidden; /* Hide anything that goes outside */
+}
+
+/* NEW: Styles for images placed INSIDE the .image-placeholder divs in team members */
+.team-member .image-placeholder img {
+    width: 100%; /* Image fills the placeholder's width */
+    height: 100%; /* Image fills the placeholder's height */
+    object-fit: cover; /* Important: Crops to fit while maintaining aspect ratio */
+    display: block;
+    border-radius: inherit; /* Inherit border-radius from parent placeholder */
+}
+
+.team-member h3 {
+    margin-top: 0;
+    color: white; /* White text for name */
+    font-size: 1.2em; /* Smaller name font as per sample */
+    margin-bottom: 5px;
+    text-transform: uppercase; /* Uppercase as per sample */
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.team-member p.role { /* Role was not present in sample, but keeping for flexibility */
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+
+/* ==================================================================== */
+/* --- RESPONSIVE ADJUSTMENTS --- */
+/* ==================================================================== */
+@media (max-width: 992px) {
+    .site-header, .site-footer {
+        padding: 15px 20px; /* Reduce padding on smaller screens */
+    }
+
+    /* Home page sections */
+    .content-section {
+        flex-direction: column; /* Stack image and text vertically */
+        padding: 50px 20px;
+        text-align: center; /* Center text content */
+    }
+
+    .content-section.flipped {
+        flex-direction: column; /* Keep stacked */
+    }
+
+    .content-section .text-content {
+        max-width: 100%; /* Allow text to take full width */
+        margin-bottom: 30px; /* Add space below text when stacked */
+    }
+
+    .content-section .image-container {
+        max-width: 100%;
+        min-height: 300px;
+    }
+
+    .mid-section {
+        padding: 50px 20px;
+    }
+
+    .mid-section h2 {
+        font-size: 2.2em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Single column for features */
+        gap: 20px;
+    }
+
+    .feature-box {
+        text-align: center; /* Center text in feature boxes on small screens */
+    }
+
+    /* Gallery/Shop Hero Sections */
+    .gallery-hero, .shop-hero {
+        flex-direction: column;
+        padding: 50px 20px;
+        text-align: center;
+    }
+    .gallery-hero .text-content, .shop-hero .text-content {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+    .gallery-hero .image-container, .shop-hero .image-container {
+        max-width: 100%;
+        min-height: 300px;
+    }
+
+    /* Pricing section */
+    .pricing-section {
+        padding: 50px 20px;
+    }
+    .product-categories {
+        flex-direction: column; /* Stack categories vertically */
+        gap: 30px;
+    }
+    .product-category-box {
+        min-height: 250px;
+    }
+
+    /* Team Section */
+    .team-section {
+        padding: 50px 20px;
+    }
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust for smaller screens */
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: row; /* Keep logo and toggle in a row */
+        justify-content: space-between; /* Space out logo and toggle */
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Show the hamburger menu button */
+    }
+
+    .main-nav {
+        /* Mobile menu styling: initially off-screen */
+        position: absolute;
+        top: 100%; /* Position right below the header */
+        left: -100%; /* Start off-screen to the left */
+        width: 100%;
+        height: auto; /* Adjust height based on content */
+        max-height: calc(100vh - 60px); /* Adjust based on header height, to allow scroll */
+        background-color: #bc6e26; /* Same as header background */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: left 0.3s ease-out; /* Smooth slide transition */
+        overflow-y: auto; /* Enable scrolling if menu content is too long */
+        padding-bottom: 20px; /* Add some padding at the bottom */
+    }
+
+    .main-nav.nav-open {
+        left: 0; /* Slide menu into view */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* CENTERS THE LI ELEMENTS HORIZONTALLY */
+        padding: 20px 0; /* Add padding inside the menu */
+    }
+
+    .main-nav li {
+        margin: 10px 0; /* Adjust spacing for vertical nav */
+        /* IMPORTANT FIX: REMOVED width: 100%; to allow align-items: center to work */
+    }
+
+    .main-nav a {
+        display: block; /* Make links block-level for larger tap area */
+        padding: 10px 20px; /* Add padding for better clickability */
+        width: 100%; /* Ensures the link itself fills the LI's width for tap, but LI is now centered */
+        text-align: center; /* Center the text within the link */
+    }
+
+    .main-nav a.active::after {
+        bottom: 0; /* Adjust underline position for block links */
+    }
+
+    .site-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .section-heading {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .section-subheading {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    /* Buttons in sections */
+    .section1-buttons .btn,
+    .section3-buttons .btn {
+        display: block; /* Make buttons stack */
+        margin: 10px auto; /* Center them */
+        width: 80%; /* Give them a width */
+    }
+    .section1-buttons .btn:last-child {
+        margin-right: auto; /* Remove right margin from last button */
+    }
+
+    /* Team Grid on smaller phones */
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Allow two columns on phones */
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header, .site-footer {
+        padding: 15px 15px;
+    }
+    .site-name {
+        font-size: 1em;
+    }
+    .main-nav a {
+        font-size: 0.8em;
+    }
+    .section-heading {
+        font-size: 1.8em;
+    }
+    .section-subheading {
+        font-size: 0.9em;
+    }
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    /* Placeholders in grids */
+    .gallery-grid-container .image-placeholder,
+    .product-category-box .image-placeholder {
+        height: 180px; /* Smaller height for small screens */
+        font-size: 1.2em;
+    }
+    .product-category-box {
+        font-size: 1.5em;
+    }
+    .team-member .image-placeholder {
+        width: 120px;
+        height: 120px;
+        font-size: 1.2em;
+    }
+    .team-member h3 {
+        font-size: 1em;
+    }
+}
